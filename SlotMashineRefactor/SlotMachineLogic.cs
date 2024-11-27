@@ -1,13 +1,12 @@
 ﻿using System;
 
-
 namespace SlotMashineRefactor
 {
     public static class SlotMachineLogic
     {
+
         private static readonly Random random = new Random();
 
-        public static int[,] GenerateGrid(int rows, int cols)
         {
             int[,] grid = new int[rows, cols];
             for (int row = 0; row < rows; row++)
@@ -63,7 +62,7 @@ namespace SlotMashineRefactor
             for (int row = 1; row < grid.GetLength(0); row++)
             {
                 if (grid[row, col] != first)
-                {
+        {
                     return false;
                 }
             }
@@ -100,9 +99,9 @@ namespace SlotMashineRefactor
             bool primaryWin = firstPrimary != 0;
 
             for (int i = 1; i < size; i++)
-            {
+        {
                 if (grid[i, i] != firstPrimary)
-                {
+            {
                     primaryWin = false;
                     break;
                 }
@@ -111,9 +110,9 @@ namespace SlotMashineRefactor
             int firstSecondary = grid[0, size - 1];
             bool secondaryWin = firstSecondary != 0;
             for (int i = 1; i < size; i++)
-            {
-                if (grid[i, size - 1 - i] != firstSecondary)
                 {
+                if (grid[i, size - 1 - i] != firstSecondary)
+                    {
                     secondaryWin = false;
                     break;
                 }
@@ -126,7 +125,7 @@ namespace SlotMashineRefactor
         {
             int firstElement = grid[0, 0];
             if (firstElement == 0)
-            {
+        {
                 return false;
             }
             foreach (int element in grid)
