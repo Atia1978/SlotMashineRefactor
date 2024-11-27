@@ -7,6 +7,14 @@ namespace SlotMashineRefactor
 
         private static readonly Random random = new Random();
 
+        public static int Money { get; private set; } = 100;
+
+        public static void DeductWager(int wager) => Money -= wager;
+
+        public static void AddWinnings(int winnings) => Money += winnings;
+
+        public static int[,] GenerateGrid()
+
         {
             int[,] grid = new int[rows, cols];
             for (int row = 0; row < rows; row++)
@@ -43,7 +51,7 @@ namespace SlotMashineRefactor
             }
 
             for (int col = 1; col < grid.GetLength(1); col++)
-            {
+        {
                 if (grid[row, col] != first)
                 {
 
