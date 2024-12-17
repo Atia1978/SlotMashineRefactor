@@ -29,11 +29,23 @@ namespace SlotMashineRefactor
 
         public static void AddWinnings(int winnings)
         {
-            if (winnings > 0)
+            if (winnings < 0)
             {
                 throw new ArgumentException("Winnings cannot be negative.");
             }
             Money += winnings;
+        }
+        public static int GetInitialCredit()
+        {
+            while (true)
+            {
+                Console.Write("Enter your initial credit amount: $");
+                if (int.TryParse(Console.ReadLine(), out int credit) && credit > 0)
+                {
+                    return credit;
+                }
+                Console.WriteLine("Invalid input. Please enter a positive number.");
+            }
         }
     }
 }

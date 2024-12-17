@@ -4,10 +4,10 @@
     {
         static void Main(string[] args)
         {
-           
 
-            Player.InitializeMoney(100);
-            Console.WriteLine("Welcome to the Slot Machine Game!");
+            int initialCredit = Player.GetInitialCredit();
+            Player.InitializeMoney(initialCredit);
+            SlotMachineUI.ShowWelcomeMessage();
             var (rows, cols) = SlotMachineUI.GetGridDimensions();
 
             while (Player.Money > 0)
@@ -30,7 +30,7 @@
 
                 if (Player.Money <= 0)
                 {
-                    Console.WriteLine("You have no money left. Game over!");
+                    SlotMachineUI.ShowGameOverMessage();
                     break;
                 }
 

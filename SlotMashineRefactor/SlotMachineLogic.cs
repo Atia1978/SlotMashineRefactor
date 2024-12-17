@@ -7,13 +7,7 @@ namespace SlotMashineRefactor
 
         private static readonly Random random = new Random();
 
-        public static int Money { get; private set; } = 100;
-
-        public static void DeductWager(int wager) => Money -= wager;
-
-        public static void AddWinnings(int winnings) => Money += winnings;
-
-        public static int[,] GenerateGrid()
+        public static int[,] GenerateGrid(int rows, int cols)
 
         {
             int[,] grid = new int[rows, cols];
@@ -21,7 +15,7 @@ namespace SlotMashineRefactor
             {
                 for (int col = 0; col < cols; col++)
                 {
-                    grid[row, col] = random.Next(SlotMachineGewinnElement.MIN_VALUE, SlotMachineGewinnElement.MAX_VALUE);
+                    grid[row, col] = random.Next(SlotMachineWinningsElement.MIN_VALUE, SlotMachineWinningsElement.MAX_VALUE);
                 }
             }
             return grid;
@@ -39,19 +33,16 @@ namespace SlotMashineRefactor
                 _ => false
             };
 
-            int multiplier = mode == GameMode.Jackpot ? SlotMachineGewinnElement.JACKPOT_MULTIPLIER : SlotMachineGewinnElement.WINNING_MULTIPLIER;
+            int multiplier = mode == GameMode.Jackpot ? SlotMachineWinningsElement.JACKPOT_MULTIPLIER : SlotMachineWinningsElement.WINNING_MULTIPLIER;
+
             return win ? wager * multiplier : 0;
         }
         public static bool CheckRowWin(int row, int[,] grid)
         {
             int first = grid[row, 0];
-            if (first == 0)
-            {
-                return false;
-            }
 
             for (int col = 1; col < grid.GetLength(1); col++)
-        {
+            {
                 if (grid[row, col] != first)
                 {
 
@@ -63,14 +54,11 @@ namespace SlotMashineRefactor
         public static bool CheckColumnWin(int col, int[,] grid)
         {
             int first = grid[0, col];
-            if (first == 0)
-            {
-                return false;
-            }
+
             for (int row = 1; row < grid.GetLength(0); row++)
             {
                 if (grid[row, col] != first)
-        {
+                {
                     return false;
                 }
             }
@@ -104,12 +92,12 @@ namespace SlotMashineRefactor
         {
             int size = Math.Min(grid.GetLength(0), grid.GetLength(1));
             int firstPrimary = grid[0, 0];
-            bool primaryWin = firstPrimary != 0;
+            bool primaryWin = true;
 
             for (int i = 1; i < size; i++)
-        {
-                if (grid[i, i] != firstPrimary)
             {
+                if (grid[i, i] != firstPrimary)
+                {
                     primaryWin = false;
                     break;
                 }
@@ -117,10 +105,11 @@ namespace SlotMashineRefactor
             }
             int firstSecondary = grid[0, size - 1];
             bool secondaryWin = firstSecondary != 0;
+
             for (int i = 1; i < size; i++)
-                {
+            {
                 if (grid[i, size - 1 - i] != firstSecondary)
-                    {
+                {
                     secondaryWin = false;
                     break;
                 }
@@ -133,7 +122,7 @@ namespace SlotMashineRefactor
         {
             int firstElement = grid[0, 0];
             if (firstElement == 0)
-        {
+            {
                 return false;
             }
             foreach (int element in grid)

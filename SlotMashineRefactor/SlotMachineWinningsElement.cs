@@ -2,7 +2,7 @@
 
 namespace SlotMashineRefactor
 {
-    public class SlotMachineGewinnElement
+    public class SlotMachineWinningsElement
 
     {
         public const int WINNING_MULTIPLIER = 2;
