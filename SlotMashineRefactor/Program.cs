@@ -5,30 +5,35 @@
         static void Main(string[] args)
         {
 
-            int initialCredit = Player.GetInitialCredit();
-            Player.InitializeMoney(initialCredit);
             SlotMachineUI.ShowWelcomeMessage();
+
+            SlotMachineUI.ShowGameModesExplanation();
+            int playerInitialCredit = SlotMachineUI.GetInitialCredit();
+
+            var player = new Player(playerInitialCredit);
+
+
             var (rows, cols) = SlotMachineUI.GetGridDimensions();
 
-            while (Player.Money > 0)
+            while (player.Money > 0)
             {
-                SlotMachineUI.ShowMoney(Player.Money);
+                SlotMachineUI.ShowMoney(player.Money);
 
-                int wager = SlotMachineUI.GetWager(Player.Money);
-                Player.DeductWager(wager);
+                int wager = SlotMachineUI.GetWager(player.Money);
+                player.DeductWager(wager);
 
                 GameMode gameMode = SlotMachineUI.GetGameMode();
 
-                int[,] grid = SlotMachineLogic.GenerateGrid(rows,cols);
+                int[,] grid = SlotMachineLogic.GenerateGrid(rows, cols);
                 SlotMachineUI.DisplayGrid(grid);
 
-                int winnings = SlotMachineLogic.CalculateWinnings(wager,gameMode,grid);
-                Player.AddWinnings(winnings);
+                int winnings = SlotMachineLogic.CalculateWinnings(wager, gameMode, grid);
+                player.AddWinnings(winnings);
 
                 SlotMachineUI.DisplayWinnings(winnings);
-                SlotMachineUI.ShowMoney(Player.Money);
+                SlotMachineUI.ShowMoney(player.Money);
 
-                if (Player.Money <= 0)
+                if (player.Money <= 0)
                 {
                     SlotMachineUI.ShowGameOverMessage();
                     break;

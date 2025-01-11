@@ -1,0 +1,51 @@
+# Slot Machine Game
+
+## Game Modes Explained
+
+### 1. **Middle Horizontal**
+- Checks only the middle row of the grid.
+- You win if all numbers in the middle row are identical.
+- Winnings are calculated as: **Wager × Multiplier**.
+
+---
+
+### 2. **All Rows**
+- Checks all rows (top, middle, and bottom).
+- You win if any single row has all identical numbers.
+- Winnings are the same as "Middle Horizontal" for consistency.
+
+---
+
+### 3. **All Columns**
+- Checks all columns.
+- You win if any single column has all identical numbers.
+- Winnings are calculated as: **Wager × Multiplier**.
+
+---
+
+### 4. **Diagonals**
+- Checks both diagonals:
+  - Top-left to bottom-right.
+  - Top-right to bottom-left.
+- You win if either diagonal has all identical numbers.
+- Winnings are calculated as: **Wager × Multiplier**.
+
+---
+
+### 5. **Jackpot**
+- The ultimate mode! Checks if **all numbers in the grid** are identical.
+- Must explicitly select "Jackpot" mode to play for it.
+- Winnings are calculated as: **Wager × Jackpot Multiplier**.
+
+---
+
+## Rules
+- You must place a wager to play.
+- Winnings depend on the selected mode and match results.
+- The game ends when you run out of money or choose to quit.
+
+## Example
+If you select "All Rows" and wager $10:
+- You win if any of the rows has all identical numbers.
+- Winnings will be **$10 × Winning Multiplier**.
+

@@ -46,7 +46,7 @@ namespace SlotMashineRefactor
 
             {
                 int maxMode = Enum.GetValues(typeof(GameMode)).Cast<int>().Max();
-                if (int.TryParse(Console.ReadLine(), out int mode) && Enum.IsDefined(typeof(GameMode),mode))
+                if (int.TryParse(Console.ReadLine(), out int mode) && Enum.IsDefined(typeof(GameMode), mode))
                 {
                     return (GameMode)mode;
                 }
@@ -97,7 +97,7 @@ namespace SlotMashineRefactor
                 if (string.IsNullOrWhiteSpace(input))
                 {
                     Console.WriteLine($"Input is empty. Defaulting to {MIN_VALUE}.");
-                   
+
                     return MIN_VALUE;
                 }
                 if (int.TryParse(input, out int value) && value > 0)
@@ -106,7 +106,7 @@ namespace SlotMashineRefactor
                     {
                         return value;
                     }
-                   if (value < MIN_VALUE)
+                    if (value < MIN_VALUE)
                     {
                         Console.WriteLine($"Value must be at least {MIN_VALUE}. Defaulting to {MIN_VALUE}.");
                         return MIN_VALUE;
@@ -119,6 +119,28 @@ namespace SlotMashineRefactor
 
                 }
             }
+        }
+        public static int GetInitialCredit()
+        {
+            while (true)
+            {
+                Console.Write("Enter your initial credit amount: $");
+                if (int.TryParse(Console.ReadLine(), out int credit) && credit > 0)
+                {
+                    return credit;
+                }
+                Console.WriteLine("Invalid input. Please enter a positive number.");
+            }
+        }
+        public static void ShowGameModesExplanation()
+        {
+            Console.WriteLine("\n--- Game Modes Explanation ---");
+            Console.WriteLine("1. Middle Horizontal: Win if the middle row has identical numbers.");
+            Console.WriteLine("2. All Rows: Win if any row has identical numbers.");
+            Console.WriteLine("3. All Verticals: Win if any column has identical numbers.");
+            Console.WriteLine("4. Diagonals: Win if any diagonal has identical numbers.");
+            Console.WriteLine("5. Jackpot: Win big if all grid numbers are identical.");
+            Console.WriteLine("--------------------------------\n");
         }
 
         public static bool PlayAgain()
@@ -141,5 +163,6 @@ namespace SlotMashineRefactor
         {
             Console.WriteLine("You have no money left. Game over!");
         }
+
     }
 }
